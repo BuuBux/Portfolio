@@ -34,6 +34,7 @@
     <Main>
       <about-me />
       <projects-component />
+      <contact-component />
     </Main>
     <Footer>
 
@@ -63,13 +64,15 @@ import ButtonComponent from '../components/ButtonComponent';
 import SocialMedia from '../components/SocialMediaComponent';
 import AboutMe from '../components/AboutMeComponent';
 import ProjectsComponent from '../components/ProjectsComponent';
+import ContactComponent from '../components/ContactComponent';
 
 export default {
   components: {
     ButtonComponent,
     SocialMedia,
     AboutMe,
-    ProjectsComponent
+    ProjectsComponent,
+    ContactComponent
   },
   metaInfo: {
     title: 'Kamil Kras - Jr. Frontend Developer',

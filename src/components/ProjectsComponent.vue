@@ -4,8 +4,8 @@
             <div class="row">
                 <div class="col-12">
                     <section-header-component header="Projekty..." />
-                    <div class="categories">
-                        <ul ref="categoryList" class="categories__list">
+                    <div ref="categoryList" class="categories">
+                        <ul class="categories__list">
                             <li
                                 ref="categoryItem"
                                 class="categories__item"
@@ -17,8 +17,8 @@
                                     :key="index">
                                 {{category.name}}
                             </li>
-                            <span ref="categoryDecorator" class="categories_decorator"></span>
                         </ul>
+                        <span ref="categoryDecorator" class="categories_decorator"></span>
                     </div>
                 </div>
             </div>
@@ -26,13 +26,18 @@
                :key="index"
                v-for="(projects, index) in projects"
                class="row">
-                <div class="projects-section__grid">
+                <transition-group
+                    class="projects-section__grid"
+                    :class="{ 'flexing' : selected !== ''}"
+                    appear
+                    name="grid"
+                    tag="div">
                     <projects-article-component
                         :key="project.id"
                         v-for="(project, index) in projects"
                         :project="project"
                         :index="index" />
-                </div>
+                </transition-group>
             </div>
         </div>
     </section>
@@ -94,9 +99,8 @@
                 const activeCategory = this.$refs.categoryItem
                     .filter((domElement) => domElement.classList.contains('categories__item--active'))[0].getBoundingClientRect();
                 const width = activeCategory.right - activeCategory.left;
-                this.$refs.categoryDecorator.style.width = `${width}px`;
                 const relativePosition = activeCategory.left - parent.left;
-                this.$refs.categoryDecorator.style.transform = `translate(${relativePosition - 1}px, 0)`;
+                this.$refs.categoryDecorator.style.cssText = `transform: translate(${relativePosition}px, 0); width: ${width}px;`
             },
             switchActiveCategory(category) {
               this.selected = category;
@@ -147,13 +151,14 @@
     .categories {
         margin: 55px auto;
         text-align: center;
+        position: relative;
         .categories__list {
             display: inline-flex;
             justify-content: center;
-            border: 1px solid $main-color;
-            position: relative;
             .categories__item {
                 transition: color 0.35s 0.3s ease-in-out;
+                list-style: none;
+                padding: 8px 35px;
                 &:hover {
                     cursor: pointer;
                 }
@@ -163,11 +168,6 @@
                         cursor: default;
                     }
                 }
-                &:not(:first-child) {
-                    border-left: 1px solid $main-color;
-                }
-                list-style: none;
-                padding: 8px 35px;
             }
         }
     }
