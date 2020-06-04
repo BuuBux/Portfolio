@@ -1,12 +1,12 @@
 <template>
     <a v-if="external" class="read-more">
         <span class="read-more__decorator read-more__sides" />
-        {{ buttonText }}
+            {{ buttonText }}
         <span class="read-more__decorator read-more__vertices" />
     </a>
     <g-link v-else class="read-more">
         <span class="read-more__decorator read-more__sides" />
-        {{ buttonText }}
+            {{ buttonText }}
         <span class="read-more__decorator read-more__vertices" />
     </g-link>
 </template>
@@ -40,7 +40,7 @@
     font: 400 18px/1 'Poppins', sans-serif;
     color: $main-color;
     position: relative;
-    transition: color 0.35s ease-in-out;
+    transition: color 0.35s ease-in-out, transform 0.15s ease-in-out;
     .read-more__decorator {
         position: absolute;
         bottom: 0;
@@ -64,6 +64,7 @@
     }
     &:hover {
       color: $secondary-color;
+      transform: scale(.9);
       .read-more__sides {
         height: 100%;
         border-left: 2px solid $secondary-color;

@@ -33,6 +33,7 @@
                     name="grid"
                     tag="div">
                     <projects-article-component
+                        :selected="selected"
                         :key="project.id"
                         v-for="(project, index) in projects"
                         :project="project"
@@ -193,6 +194,15 @@
                 "p4 p4 p5 p5 p6 p6"
                 "p7 p7 p9 p9 p9 p9"
                 "p8 p8 p9 p9 p9 p9";
+
+        &.flexing {
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            .projects-section__article {
+                margin-bottom: 2em;
+            }
+        }
 
         .project__1 { grid-area: p1; }
 

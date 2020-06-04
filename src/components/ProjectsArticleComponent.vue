@@ -1,19 +1,21 @@
 <template>
     <article
         class="projects-section__article"
-        :style="`background-image: url(${project.projectImage.url})`"
-        :class="`project__${index+1}`">
-        <div class="projects-section__details">
-            <h4 class="project-name">
-                {{project.projectTitle}}<span class="project-name__decorator">_</span>
-            </h4>
-            <div class="projects-section__links">
-                <a :href="project.projectUrl">
-                    <i class="fas fa-globe-americas"></i>
-                </a>
-                <a v-if="project.githubLinkToProject" :href="project.githubLinkToProject">
-                    <i class="fab fa-github-alt"></i>
-                </a>
+        :class="[`project__${index+1}`, { 'col-4' : selected !== ''}]">
+        <div :style="`background-image: url(${project.projectImage.url})`"
+             class="projects-section__background">
+            <div class="projects-section__details">
+                <h4 class="project-name">
+                    {{project.projectTitle}}<span class="project-name__decorator">_</span>
+                </h4>
+                <div class="projects-section__links">
+                    <a :href="project.projectUrl">
+                        <i class="fas fa-globe-americas"></i>
+                    </a>
+                    <a v-if="project.githubLinkToProject" :href="project.githubLinkToProject">
+                        <i class="fab fa-github-alt"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </article>
@@ -22,6 +24,10 @@
 <script>
     export default {
         props: {
+            selected: {
+                type: String,
+                required: true
+            },
             project: {
                 type: Object,
                 required: true
@@ -38,12 +44,16 @@
     @import '../styles/variables';
 
     .projects-section__article {
-        position: relative;
-        box-shadow: 4px 4px 20px 0 rgba(1,1,1,.2);
-        min-height: 260px;
-        background-position: 50%;
-        background-size: cover;
-        background-repeat: no-repeat;
+        display: flex;
+        .projects-section__background {
+            position: relative;
+            box-shadow: 4px 4px 20px 0 rgba(1,1,1,.2);
+            min-height: 260px;
+            background-position: 50%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            flex-grow: 1;
+        }
         &:hover {
             .projects-section__details {
                 transform: scale(1);

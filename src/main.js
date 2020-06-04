@@ -1,5 +1,9 @@
 require('./main.scss');
 
+import Vue from 'vue';
+import Vuelidate from 'vuelidate';
+Vue.use(Vuelidate);
+
 import Header from '~/layouts/Header.vue';
 import Main from '~/layouts/Main.vue';
 import Footer from '~/layouts/Footer.vue';
