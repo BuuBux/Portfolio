@@ -3,13 +3,13 @@
         <h5 class="contact__title"> {{ contactHeader }} </h5>
         <input-component
                 @blur="$v.contactForm.name.$touch()"
-                :class="{'field--invalid' : $v.contactForm.name.$error }"
+                :class="{ 'field--invalid' : $v.contactForm.name.$error }"
                 v-model="contactForm.name"
                 title="Imie i nazwisko"
                 type="text" />
         <input-component
                 @blur="$v.contactForm.email.$touch()"
-                :class="{'field--invalid' : $v.contactForm.email.$error }"
+                :class="{ 'field--invalid' : $v.contactForm.email.$error }"
                 v-model="contactForm.email"
                 title="E-mail"
                 type="email" />
@@ -33,7 +33,6 @@
 
 <script>
     import InputComponent from './InputComponent';
-    import NProgress from 'nprogress';
     import axios from 'axios';
     import { required, minLength, email } from 'vuelidate/lib/validators';
 
@@ -59,6 +58,7 @@
               name: { required, minLength: minLength(3) },
               email: { required, email },
               topic: { required, minLength: minLength(10) },
+              phone: { },
           }
         },
         components: {
@@ -70,14 +70,18 @@
             },
             sendMail() {
                 this.$v.$touch();
+                this.$notify({
+                    group: 'info',
+                    type: 'error',
+                    title: 'Important message',
+                    text: 'Hello user! This is a notification!'
+                });
                 if (!this.$v.$invalid) {
-                    NProgress.start();
                     axios.post('', {})
                         .then((response) => {
                             this.contactForm = this.flashContactForm();
                         })
                         .catch((error) => {
-                            NProgress.done();
                             throw Error(error);
                         });
                 }
@@ -104,6 +108,7 @@
         background: transparent;
         border: 0;
         margin: 55px auto 0;
+        outline: none;
         &:hover {
             cursor: pointer;
         }

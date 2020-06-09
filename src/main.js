@@ -2,7 +2,10 @@ require('./main.scss');
 
 import Vue from 'vue';
 import Vuelidate from 'vuelidate';
+import Notifications from 'vue-notification/dist/ssr.js'
+
 Vue.use(Vuelidate);
+Vue.use(Notifications)
 
 import Header from '~/layouts/Header.vue';
 import Main from '~/layouts/Main.vue';

@@ -1,5 +1,5 @@
 <template>
-    <section id="projects" class="projects">
+    <section ref="projects" id="projects" class="projects">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -27,9 +27,12 @@
                v-for="(projects, index) in projects"
                class="row">
                 <transition-group
+                    mode="out-in"
+                    @enter="playAnimation"
+                    @leave="leave"
+                    :css="false"
                     class="projects-section__grid"
                     :class="{ 'flexing' : selected !== ''}"
-                    appear
                     name="grid"
                     tag="div">
                     <projects-article-component
@@ -64,6 +67,7 @@
 <script>
     import ProjectsArticleComponent from '../components/ProjectsArticleComponent';
     import SectionHeaderComponent from './SectionHeaderComponent';
+    import gsap from 'gsap';
 
     export default {
         components: {
@@ -74,6 +78,7 @@
             return {
                 selected: '',
                 projects: [],
+                fired: false,
                 categories: [
                     {
                         name: 'Wszystkie',
@@ -95,6 +100,31 @@
             }
         },
         methods: {
+            leave(el, done) {
+                const delay = el.dataset.index * 150;
+                setTimeout(() => {
+                    gsap.to(el, {
+                        translateX: -150,
+                        opacity: 0,
+                        position: 'absolute',
+                        duration: 0.5,
+                        onComplete: done
+                    })
+                }, delay);
+            },
+            playAnimation() {
+                gsap.to('.projects-section__article', {
+                    duration: 0.75,
+                    opacity: 1,
+                    scale: 1,
+                    ease: 'expo.out',
+                    stagger: {
+                        each: 0.1,
+                        from: 'edges'
+                    },
+                });
+                this.fired = true;
+            },
             animateMenu() {
                 const parent = this.$refs.categoryList.getBoundingClientRect();
                 const activeCategory = this.$refs.categoryItem
@@ -125,7 +155,16 @@
                     return newProjects;
                 }
                 return [ projects ];
+            },
+            checkUserPosition() {
+                const bottomOfImage = this.$refs.projects.getBoundingClientRect().top - document.documentElement.clientHeight / 2;
+                if (bottomOfImage <= 0) {
+                    if (!this.fired) {
+                        this.playAnimation();
+                    }
+                }
             }
+
         },
         watch: {
             selected: function () {
@@ -134,6 +173,8 @@
         },
         mounted() {
             this.projects = this.convertProject(this.$static.graphCMS.projects);
+            this.checkUserPosition();
+            window.addEventListener('scroll', this.checkUserPosition);
             setTimeout(() => {
                 this.animateMenu();
             }, 1000)
@@ -146,7 +187,19 @@
     @import '../styles/variables';
 
     .projects {
-        padding: 150px 0;
+        padding: 150px 0 200px;
+        position: relative;
+        &:after {
+            content: '';
+            background: url(../assets/wave.svg) bottom left / contain no-repeat;
+            width: 100%;
+            height: 184px;
+            bottom: -1px;
+            display: block;
+            left: 0;
+            position: absolute;
+            transform: rotate(-180deg) scaleX(-1);
+        }
     }
 
     .categories {

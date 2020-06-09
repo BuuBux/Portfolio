@@ -15,7 +15,8 @@
               :external="false"
               href="#about" />
           </div>
-          <g-image class="header__image" src="../assets/undraw_computer.svg" />
+<!--          <g-image class="header__image" src="../assets/undraw_computer.svg" />-->
+          <header-image class="header__image" />
         </div>
         <div class="row header__links">
           <div class="col-6">
@@ -39,6 +40,7 @@
     <Footer>
 
     </Footer>
+    <notifications group="info" />
   </div>
 </template>
 
@@ -65,6 +67,7 @@ import SocialMedia from '../components/SocialMediaComponent';
 import AboutMe from '../components/AboutMeComponent';
 import ProjectsComponent from '../components/ProjectsComponent';
 import ContactComponent from '../components/ContactComponent';
+import HeaderImage from '../components/HeaderImage';
 
 export default {
   components: {
@@ -72,7 +75,8 @@ export default {
     SocialMedia,
     AboutMe,
     ProjectsComponent,
-    ContactComponent
+    ContactComponent,
+    HeaderImage
   },
   metaInfo: {
     title: 'Kamil Kras - Jr. Frontend Developer',
@@ -85,6 +89,38 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  .vue-notification-group {
+    position: fixed;
+    margin: 15px 15px 0 0;
+    .vue-notification {
+      padding: 10px;
+      margin: 0 5px 5px;
+
+      font-size: 12px;
+
+      color: #ffffff;
+      background: #44A4FC;
+      border-left: 5px solid #187FE7;
+
+      &.warn {
+        background: #ffb648;
+        border-left-color: #f48a06;
+      }
+
+      &.error {
+        background: #E54D42;
+        border-left-color: #B82E24;
+      }
+
+      &.success {
+        background: #68CD86;
+        border-left-color: #42A85F;
+      }
+    }
+  }
+</style>
 
 <style lang="scss" scoped>
   .header__image {

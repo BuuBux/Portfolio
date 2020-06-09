@@ -13,8 +13,8 @@
                         :external="true"
                         href="./assets/cv.pdf" />
                 </div>
-                <div class="col-4">
-                    AAA
+                <div class="col-4 skills__wrapper">
+                    <skills-image />
                 </div>
             </div>
         </div>
@@ -39,10 +39,13 @@
 <script>
     import SectionHeaderComponent from './SectionHeaderComponent';
     import ButtonComponent from './ButtonComponent';
+    import SkillsImage from './SkillsImage';
+
     export default {
         components: {
             ButtonComponent,
-            SectionHeaderComponent
+            SectionHeaderComponent,
+            SkillsImage
         }
     }
 </script>
@@ -53,6 +56,12 @@
     .about {
         padding: 125px 0 250px;
         background: $background-light;
+    }
+
+    .skills__wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .about__description {

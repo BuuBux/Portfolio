@@ -45,6 +45,8 @@
 
     .projects-section__article {
         display: flex;
+        transform: scale(0);
+        opacity: 0;
         .projects-section__background {
             position: relative;
             box-shadow: 4px 4px 20px 0 rgba(1,1,1,.2);

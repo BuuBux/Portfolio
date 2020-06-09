@@ -55,16 +55,34 @@
         border-radius: 16px;
     }
     .nav__link {
-        font: 700 24px/1.5 'Poppins', sans-serif;
+        font: 700 22px/1.5 'Poppins', sans-serif;
         text-decoration: none;
         color: #fff;
         position: relative;
         transition: color 0.35s ease-in-out;
+        display: inline-block;
+        &:after {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 0);
+            background: transparent;
+            height: 2px;
+            bottom: -5px;
+            transform-origin: 50%;
+            width: 0;
+            transition: width 0.25s ease-in-out, background-color 0.25s ease-in-out;
+        }
         &:not(:first-child) {
-            margin-left: 20px;
+            margin-left: 25px;
         }
         &:hover {
             color: $secondary-color;
+            &:after {
+                width: 100%;
+                background: $secondary-color;
+            }
         }
     }
 </style>

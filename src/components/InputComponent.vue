@@ -1,11 +1,12 @@
 <template>
-    <div class="field">
+    <div
+        :class="{ 'focused' : isFocused }"
+        class="field">
         <label
-            :class="[{ 'focused' : focused }]"
-            class="field__abel">
-            <span class="field__label"> {{ title }} </span>
+            class="field__label">
+            <span class="field__title"> {{ title }} </span>
             <input
-                    @focusin="focused = true"
+                    @focusin="isFocused = true"
                     v-bind="$attrs"
                     v-on="$listeners"
                     class="field__input"
@@ -20,7 +21,7 @@
         data() {
             return {
                 inputValue: '',
-                focused: false,
+                isFocused: false,
             }
         },
         props: {
@@ -38,15 +39,86 @@
 </script>
 
 <style lang="scss">
+    @import '../styles/variables';
+
     .field {
         max-width: 320px;
         margin: 0 auto;
-        .field__input {
-            border-width: 0 0 2px 0;
-            border-style: solid;
-            border-color: #333;
-            outline: 0;
-            padding: 8px 15px;
+        &.field--invalid {
+            .field__label {
+                .field__title {
+                    color: $secondary-color;
+                }
+                &:after {
+                    background: $secondary-color;
+                }
+            }
+        }
+        &.focused {
+            &.field--invalid {
+                .field__label {
+                    .field__title {
+                        color: $secondary-color;
+                    }
+                    &:after {
+                        background: $secondary-color;
+                    }
+                }
+            }
+            .field__label {
+                .field__title {
+                    color: $main-color;
+                    transform: translate(0, -100%) scale(.8);
+                    transition: transform 0.25s ease-in-out;
+                }
+                &:after {
+                    background: $main-color;
+                    animation: 0.25s ease-in-out 1 alternate borderTransform;
+                }
+            }
+        }
+        &:not(:last-child) {
+            margin-bottom: 15px;
+        }
+        .field__label {
+            position: relative;
+            .field__title {
+                position: absolute;
+                left: 5px;
+                bottom: 0;
+                transform-origin: 0;
+                transform: translate(0, 0) scale(1);
+                transition: transform 0.25s ease-in-out, color 0.25s ease-in-out;
+            }
+            .field__input {
+                border: 0;
+                outline: 0;
+                padding: 25px 5px 8px 5px;
+                width: 100%;
+                transition: border-bottom-color 0.25s ease-in-out;
+            }
+            &:after{
+                content: '';
+                width: 100%;
+                height: 2px;
+                display: block;
+                position: absolute;
+                background: #333;
+                bottom: -6px;
+                left: 50%;
+                transform: translate(-50%, 0);
+                transition: background-color 0.25s ease-in-out;
+            }
+        }
+    }
+    @keyframes borderTransform {
+        0% {
+            width: 100%;
+        }
+        50% {
+            width: 0;
+        }
+        100% {
             width: 100%;
         }
     }

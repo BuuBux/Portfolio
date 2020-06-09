@@ -31,7 +31,18 @@
 <style lang="scss">
     @import '../styles/variables';
     .footer{
-        padding: 125px 0 20px;
+        position: relative;
+        &:before {
+            content: '';
+            width: 100%;
+            display: block;
+            background: url(../assets/wave.svg) top left / contain no-repeat;
+            height: 184px;
+            top: -1px;
+            left: 0;
+            position: absolute;
+        }
+        padding: 250px 0 20px;
         background-image: linear-gradient(to right, $main-color 0%, rgba($main-color, 0.6) 100%);
         .social-links__list {
             justify-content: center;
