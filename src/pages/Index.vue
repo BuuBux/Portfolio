@@ -168,12 +168,14 @@ export default {
           @media (max-height: 600px) {
             margin: 125px 0 25px 0;
           }
-          .header__image {
-            flex: 0 0 100%;
-            order: -1;
-            max-width: 90%;
-            position: static;
-            margin-bottom: 25px;
+          @media (max-width: 991px) {
+            .header__image {
+              flex: 0 0 100%;
+              order: -1;
+              max-width: 90%;
+              position: static;
+              margin-bottom: 25px;
+            }
           }
       }
       align-items: center;
