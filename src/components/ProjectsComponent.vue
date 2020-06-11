@@ -175,20 +175,37 @@
                     }
                 }
             },
+            checkIsMobile() {
+                const slider = this.$refs.slider[0].firstElementChild;
+                if (document.documentElement.getBoundingClientRect().width < 767) {
+                    this.$refs.slider.forEach(
+                        (slider) => slider.classList.add('projects__slider')
+                    );
+                    slider.addEventListener('mousedown', (e) => this.mouseDown(e, slider));
+                    slider.addEventListener('mouseleave', () => this.mouseLeaveAndUp(slider));
+                    slider.addEventListener('mouseup', () => this.mouseLeaveAndUp(slider));
+                    slider.addEventListener('mousemove', (e) => this.mouseMove(e, slider));
+                } else {
+                    this.$refs.slider.forEach(
+                        (slider) => slider.classList.remove('projects__slider')
+                    );
+                    slider.removeEventListener('mousedown', (e) => this.mouseDown(e, slider));
+                    slider.removeEventListener('mouseleave', () => this.mouseLeaveAndUp(slider));
+                    slider.removeEventListener('mouseup', () => this.mouseLeaveAndUp(slider));
+                    slider.removeEventListener('mousemove', (e) => this.mouseMove(e, slider));
+                }
+            },
             mouseDown(e, slider) {
-                console.log('clicked - down');
                 this.isDown = true;
                 slider.classList.add('project__slider--active');
                 this.startX = e.pageX - slider.offsetLeft;
                 this.scrollLeft = slider.scrollLeft;
             },
             mouseLeaveAndUp(slider) {
-                console.log('clicked - leave | up');
                 this.isDown = false;
                 slider.classList.remove('project__slider--active');
             },
             mouseMove(e, slider) {
-                console.log('clicked - move');
                 if (!this.isDown) return
                 e.preventDefault();
                 const x = e.pageX - slider.offsetLeft;
@@ -203,27 +220,13 @@
         },
         mounted() {
             this.projects = this.convertProject(this.$static.graphCMS.projects);
-            this.checkUserPosition();
-            window.addEventListener('scroll', this.checkUserPosition);
+            window.addEventListener('scroll', debounce(this.checkUserPosition, 150));
             window.addEventListener('resize', debounce(this.animateMenu, 150));
-            window.addEventListener('resize', debounce(() => {
-                if (document.documentElement.getBoundingClientRect().width < 767) {
-                    this.$refs.slider.forEach(
-                        (slider) => slider.classList.add('projects__slider')
-                    );
-                } else {
-                    this.$refs.slider.forEach(
-                        (slider) => slider.classList.remove('projects__slider')
-                    );
-                }
-            }, 150));
+            window.addEventListener('resize', debounce(this.checkIsMobile, 150));
             setTimeout(() => {
                 this.animateMenu();
-                const slider = this.$refs.slider[0].firstElementChild;
-                slider.addEventListener('mousedown', (e) => this.mouseDown(e, slider));
-                slider.addEventListener('mouseleave', () => this.mouseLeaveAndUp(slider));
-                slider.addEventListener('mouseup', () => this.mouseLeaveAndUp(slider));
-                slider.addEventListener('mousemove', (e) => this.mouseMove(e, slider));
+                this.checkUserPosition();
+                this.checkIsMobile();
             }, 1000)
         }
     }
@@ -316,6 +319,11 @@
             gap: 0;
             .projects-section__article {
                 margin-bottom: 2em;
+                @media (min-width: 768px) and (max-width: 991px) {
+                    .projects-section__background {
+                        min-height: 180px;
+                    }
+                }
             }
         }
 

@@ -15,7 +15,7 @@
               :external="false"
               href="#about" />
           </div>
-          <header-image class="d-none d-md-block header__image" />
+          <header-image class="header__image" />
         </div>
         <div class="row header__links">
           <div class="col-6">
@@ -163,23 +163,25 @@ export default {
     > .row {
       &:first-child {
         flex-grow: 1;
-        @media (min-height: 700px) and (max-width: 767px) {
           justify-content: center;
-          margin: 150px 0 100px 0;
+          margin: 125px 0 50px 0;
+          @media (max-height: 600px) {
+            margin: 125px 0 25px 0;
+          }
           .header__image {
-            display: flex !important;
             flex: 0 0 100%;
             order: -1;
-            max-width: 80%;
+            max-width: 90%;
             position: static;
+            margin-bottom: 25px;
           }
-        }
       }
       align-items: center;
     }
   }
   .header__title {
     font: 700 52px/1.5 'Poppins', sans-serif;
+    transition: font-size 0.1s ease;
     @media (max-width: 1599px) {
       font: 700 38px/1.5 'Poppins', sans-serif;
     }
@@ -188,6 +190,12 @@ export default {
     }
     @media (max-width: 991px) {
       font: 700 24px/1.5 'Poppins', sans-serif;
+    }
+    @media (max-width: 767px) {
+      font: 700 22px/1.5 'Poppins', sans-serif;
+    }
+    @media (max-width: 359px) {
+      font: 700 18px/1.5 'Poppins', sans-serif;
     }
     .header__title--decorator {
       animation: 0.6s ease-in-out infinite alternate blinking;

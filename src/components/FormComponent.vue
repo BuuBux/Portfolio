@@ -96,10 +96,10 @@
         text-align: center;
         font: 300 36px/1.5 'Poppins', sans-serif;
         margin-bottom: 50px;
-        transition: font 0.1s ease, margin 0.1s ease;
+        transition: font-size 0.1s ease, margin 0.1s ease;
         @media (max-width: 575px) {
-            font: 300 24px/1.5 'Poppins', sans-serif;
-            margin-bottom: 20px;
+            font: 300 18px/1.5 'Poppins', sans-serif;
+            margin-bottom: 25px;
         }
     }
 

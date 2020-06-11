@@ -88,14 +88,20 @@
                 bottom: 0;
                 transform-origin: 0;
                 transform: translate3D(0, 0, 0) scale(1);
-                transition: transform 0.25s ease-in-out, color 0.25s ease-in-out;
+                transition: transform 0.25s ease-in-out, color 0.25s ease-in-out, font-size 0.1s ease;
+                @media (max-width: 575px) {
+                    font: 400 14px/1.5 'Poppins', sans-serif;
+                }
             }
             .field__input {
                 border: 0;
                 outline: 0;
                 padding: 25px 5px 8px 5px;
                 width: 100%;
-                transition: border-bottom-color 0.25s ease-in-out;
+                transition: border-bottom-color 0.25s ease-in-out, padding 0.1s ease;
+                @media (max-width: 575px) {
+                    padding: 15px 5px 8px 5px;
+                }
             }
             &:after{
                 content: '';

@@ -161,7 +161,7 @@
 
     .nav {
         display: none;
-        @media (max-width: 768px) {
+        @media (max-width: 767px) {
             position: fixed;
             left: 0;
             top: 0;
@@ -205,7 +205,7 @@
         }
         &:not(:first-child) {
             margin: 0 0 0 25px;
-            @media (max-width: 768px) {
+            @media (max-width: 767px) {
                 margin: 25px 0 0 0;
             }
         }

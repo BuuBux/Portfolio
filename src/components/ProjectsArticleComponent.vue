@@ -1,7 +1,7 @@
 <template>
     <article
         class="projects-section__article"
-        :class="[`project__${index+1}`, { 'col-4' : selected !== ''}]">
+        :class="[`project__${index+1}`, { 'col-md-6 col-lg-4' : selected !== ''}]">
         <div :style="`background-image: url(${project.projectImage.url})`"
              class="projects-section__background">
             <div class="projects-section__details">
@@ -85,6 +85,12 @@
         z-index: 1;
         color: #fff;
         text-transform: uppercase;
+        @media (max-width: 767px) {
+            font: 700 36px/1 'Rajdhani', sans-serif;
+        }
+        @media (max-width: 410px) {
+            font: 700 24px/1 'Rajdhani', sans-serif;
+        }
         .project-name__decorator {
             color: $secondary-color;
             animation: 0.6s ease-in-out infinite alternate blinking;
@@ -93,6 +99,9 @@
 
     .projects-section__links {
         margin: 15px;
+        @media (max-width: 767px) {
+            margin: 5px 0 0 0;
+        }
         a {
             transition: color 0.35s ease-in-out;
             &:hover {
@@ -101,6 +110,12 @@
             color: #fff;
             &:not(:first-child) {
                 margin-left: 20px;
+            }
+            @media (max-width: 767px) {
+                font-size: 22px;
+            }
+            @media (max-width: 410px) {
+                font-size: 18px;
             }
         }
     }
@@ -119,6 +134,16 @@
         height: 100%;
         transition: transform 0.45s ease-in-out;
         transform: scale(0);
+        @media (max-width: 767px) {
+            transform: scale(1);
+            height: auto;
+            top: auto;
+            bottom: 0;
+            padding: 15px 0;
+        }
+        @media (max-width: 410px) {
+            padding: 8px 0;
+        }
     }
 
 </style>

@@ -165,6 +165,7 @@
 
 <script>
     import gsap from 'gsap';
+    import { debounce } from 'lodash';
     const masterTimeline = gsap.timeline();
 
     export default {
@@ -182,12 +183,16 @@
                     .to('.skills__image', { opacity: 1, duration: 0.1 })
                     .from('#ground-shadow', { y: -700, duration: 0.5, ease: 'expo.out' })
                     .from('#ground', { y: -700, duration: 0.5, ease: 'expo.out' });
-                this.skills.map((skill) => masterTimeline.from(`#${skill}`, { x: -550, scale: 5, duration: 0.15, ease: 'back.out( 1.7)' }));
+                this.skills.map(
+                    (skill) => masterTimeline
+                        .from(`#${skill}`, { x: -550, scale: 5, duration: 0.15, ease: 'back.out( 1.7)' }
+                    )
+                );
                 this.fired = true;
             },
             checkUserPosition() {
                 const bottomOfDocument = document.documentElement.scrollTop + document.documentElement.clientHeight;
-                const bottomOfImage = this.$refs.skills.getBoundingClientRect().x + this.$refs.skills.getBoundingClientRect().height;
+                const bottomOfImage = this.$refs.skills.getBoundingClientRect().y + this.$refs.skills.getBoundingClientRect().height;
                 if ( bottomOfDocument >= bottomOfImage) {
                     if(!this.fired) {
                         this.playAnimation();
@@ -196,9 +201,8 @@
             },
         },
         mounted() {
-            masterTimeline
-                .set('.skills__image', { opacity: 0 });
-            window.addEventListener('scroll', this.checkUserPosition);
+            masterTimeline.set('.skills__image', { opacity: 0 });
+            window.addEventListener('scroll', debounce(this.checkUserPosition, 150));
             this.checkUserPosition();
         }
     }
