@@ -68,7 +68,7 @@
             .field__label {
                 .field__title {
                     color: $main-color;
-                    transform: translate(0, -100%) scale(.8);
+                    transform: translate3D(0, -100%, 0) scale(.8);
                     transition: transform 0.25s ease-in-out;
                 }
                 &:after {
@@ -87,7 +87,7 @@
                 left: 5px;
                 bottom: 0;
                 transform-origin: 0;
-                transform: translate(0, 0) scale(1);
+                transform: translate3D(0, 0, 0) scale(1);
                 transition: transform 0.25s ease-in-out, color 0.25s ease-in-out;
             }
             .field__input {
@@ -106,7 +106,7 @@
                 background: #333;
                 bottom: -6px;
                 left: 50%;
-                transform: translate(-50%, 0);
+                transform: translate3D(-50%, 0, 0);
                 transition: background-color 0.25s ease-in-out;
             }
         }

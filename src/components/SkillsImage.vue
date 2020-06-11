@@ -182,7 +182,7 @@
                     .to('.skills__image', { opacity: 1, duration: 0.1 })
                     .from('#ground-shadow', { y: -700, duration: 0.5, ease: 'expo.out' })
                     .from('#ground', { y: -700, duration: 0.5, ease: 'expo.out' });
-                this.skills.map((skill) => masterTimeline.from(`#${skill}`, { x: -350, duration: 0.3, ease: 'expo.out' }));
+                this.skills.map((skill) => masterTimeline.from(`#${skill}`, { x: -550, scale: 5, duration: 0.15, ease: 'back.out( 1.7)' }));
                 this.fired = true;
             },
             checkUserPosition() {
@@ -193,7 +193,7 @@
                         this.playAnimation();
                     }
                 }
-            }
+            },
         },
         mounted() {
             masterTimeline

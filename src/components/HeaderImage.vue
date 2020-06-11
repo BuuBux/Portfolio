@@ -102,14 +102,14 @@
         mounted() {
             const tl = gsap.timeline();
             tl
-                .from('#computer', { scale: 0, transformOrigin: 'center', duration: 1, ease: 'expo.out' })
-                .from('.to-expand', { width: 0, duration: 1, ease: 'expo.out'})
+                .from('#computer', { scale: 0, transformOrigin: 'center', duration: 0.5, ease: 'expo.out' })
+                .from('.to-expand', { width: 0, duration: 0.5, ease: 'expo.out'})
                 .from('.after-expand', {scale: 0, transformOrigin: 'center', duration: 0.5, ease: 'expo.out' })
-                .from('.computer-text rect', { y: -300, duration: 0.3, ease: 'power1', stagger: 0.1 })
+                .from('.computer-text rect', { y: -300, duration: 0.3, ease: 'power1', stagger: 0.075 })
                 .from('.after-computer-text', { scale: 0, transformOrigin: 'center', duration: 0.3, ease: 'power1' })
                 .from('#connect', { width: 0, duration: 0.5, ease: 'power1' })
                 .from('#phone', { x: 700, duration: 0.5, ease: 'power1' })
-                .from('.phone-text rect', { x: 300, duration: 0.3, ease: 'power1', stagger: 0.1 })
+                .from('.phone-text rect', { x: 300, duration: 0.3, ease: 'power1', stagger: 0.075 })
                 .from('.after-phone-expand', { scale: 0, transformOrigin: 'center', duration: 0.3, ease: 'power1' })
                 .from('#next', { width: 0, transformOrigin: 'top right', duration: 0.3, ease: 'power1' })
                 .from('.after-next', { scale: 0, transformOrigin: 'center', duration: 0.3, ease: 'power1' })

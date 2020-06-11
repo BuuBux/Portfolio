@@ -96,6 +96,11 @@
         text-align: center;
         font: 300 36px/1.5 'Poppins', sans-serif;
         margin-bottom: 50px;
+        transition: font 0.1s ease, margin 0.1s ease;
+        @media (max-width: 575px) {
+            font: 300 24px/1.5 'Poppins', sans-serif;
+            margin-bottom: 20px;
+        }
     }
 
     .contact__form {
@@ -103,12 +108,20 @@
         padding: 50px;
         background: #fff;
         box-shadow: 4px 4px 20px 0 rgba(1, 1, 1, 0.2);
+        transition: padding 0.1s ease;
+        @media (max-width: 575px) {
+            padding: 20px;
+        }
     }
     .contact__button {
         background: transparent;
         border: 0;
         margin: 55px auto 0;
         outline: none;
+        transition: margin 0.1s ease;
+        @media (max-width: 575px) {
+            margin: 20px auto 0;
+        }
         &:hover {
             cursor: pointer;
         }

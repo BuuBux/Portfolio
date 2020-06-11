@@ -23,6 +23,15 @@
         position: relative;
         display: inline-block;
         z-index: 1;
+        @media (max-width: 1599px) {
+            font: 700 38px/1.5 'Poppins', sans-serif;
+        }
+        @media (max-width: 1199px) {
+            font: 700 32px/1.5 'Poppins', sans-serif;
+        }
+        @media (max-width: 991px) {
+            font: 700 26px/1.5 'Poppins', sans-serif;
+        }
         &:hover {
             &:after {
                 height: 100%;

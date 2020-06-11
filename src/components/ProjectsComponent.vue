@@ -25,6 +25,7 @@
             <div
                :key="index"
                v-for="(projects, index) in projects"
+               ref="slider"
                class="row">
                 <transition-group
                     mode="out-in"
@@ -67,6 +68,7 @@
 <script>
     import ProjectsArticleComponent from '../components/ProjectsArticleComponent';
     import SectionHeaderComponent from './SectionHeaderComponent';
+    import { debounce, uniqBy } from 'lodash';
     import gsap from 'gsap';
 
     export default {
@@ -79,6 +81,9 @@
                 selected: '',
                 projects: [],
                 fired: false,
+                isDown: false,
+                startX: null,
+                scrollLeft: null,
                 categories: [
                     {
                         name: 'Wszystkie',
@@ -104,8 +109,10 @@
                 const delay = el.dataset.index * 150;
                 setTimeout(() => {
                     gsap.to(el, {
-                        translateX: -150,
+                        rotation: 0.01,
+                        x: -150,
                         opacity: 0,
+                        scale: 0,
                         position: 'absolute',
                         duration: 0.5,
                         onComplete: done
@@ -114,6 +121,7 @@
             },
             playAnimation() {
                 gsap.to('.projects-section__article', {
+                    rotation: 0.01,
                     duration: 0.75,
                     opacity: 1,
                     scale: 1,
@@ -130,8 +138,11 @@
                 const activeCategory = this.$refs.categoryItem
                     .filter((domElement) => domElement.classList.contains('categories__item--active'))[0].getBoundingClientRect();
                 const width = activeCategory.right - activeCategory.left;
-                const relativePosition = activeCategory.left - parent.left;
-                this.$refs.categoryDecorator.style.cssText = `transform: translate(${relativePosition}px, 0); width: ${width}px;`
+                const relativePosition = {
+                    left: activeCategory.left - parent.left,
+                    top: activeCategory.top - parent.top,
+                };
+                this.$refs.categoryDecorator.style.cssText = `transform: translate3D(${relativePosition.left}px, ${relativePosition.top}px, 0); width: ${width}px;`
             },
             switchActiveCategory(category) {
               this.selected = category;
@@ -163,8 +174,27 @@
                         this.playAnimation();
                     }
                 }
+            },
+            mouseDown(e, slider) {
+                console.log('clicked - down');
+                this.isDown = true;
+                slider.classList.add('project__slider--active');
+                this.startX = e.pageX - slider.offsetLeft;
+                this.scrollLeft = slider.scrollLeft;
+            },
+            mouseLeaveAndUp(slider) {
+                console.log('clicked - leave | up');
+                this.isDown = false;
+                slider.classList.remove('project__slider--active');
+            },
+            mouseMove(e, slider) {
+                console.log('clicked - move');
+                if (!this.isDown) return
+                e.preventDefault();
+                const x = e.pageX - slider.offsetLeft;
+                const walk = ( x - this.startX ) * 3;
+                slider.scrollLeft = this.scrollLeft - walk;
             }
-
         },
         watch: {
             selected: function () {
@@ -175,8 +205,25 @@
             this.projects = this.convertProject(this.$static.graphCMS.projects);
             this.checkUserPosition();
             window.addEventListener('scroll', this.checkUserPosition);
+            window.addEventListener('resize', debounce(this.animateMenu, 150));
+            window.addEventListener('resize', debounce(() => {
+                if (document.documentElement.getBoundingClientRect().width < 767) {
+                    this.$refs.slider.forEach(
+                        (slider) => slider.classList.add('projects__slider')
+                    );
+                } else {
+                    this.$refs.slider.forEach(
+                        (slider) => slider.classList.remove('projects__slider')
+                    );
+                }
+            }, 150));
             setTimeout(() => {
                 this.animateMenu();
+                const slider = this.$refs.slider[0].firstElementChild;
+                slider.addEventListener('mousedown', (e) => this.mouseDown(e, slider));
+                slider.addEventListener('mouseleave', () => this.mouseLeaveAndUp(slider));
+                slider.addEventListener('mouseup', () => this.mouseLeaveAndUp(slider));
+                slider.addEventListener('mousemove', (e) => this.mouseMove(e, slider));
             }, 1000)
         }
     }
@@ -189,9 +236,13 @@
     .projects {
         padding: 150px 0 200px;
         position: relative;
+        transition: padding 0.1s ease;
+        @media (max-width: 767px) {
+            padding: 75px 0 125px;
+        }
         &:after {
             content: '';
-            background: url(../assets/wave.svg) bottom left / contain no-repeat;
+            background: url(../assets/wave.svg) top left / 100% no-repeat;
             width: 100%;
             height: 184px;
             bottom: -1px;
@@ -209,10 +260,14 @@
         .categories__list {
             display: inline-flex;
             justify-content: center;
+            flex-wrap: wrap;
             .categories__item {
-                transition: color 0.35s 0.3s ease-in-out;
+                transition: color 0.35s 0.3s ease-in-out, padding 0.2s ease-in-out;
                 list-style: none;
                 padding: 8px 35px;
+                @media (max-width: 991px) {
+                    padding: 8px 20px;
+                }
                 &:hover {
                     cursor: pointer;
                 }
@@ -230,10 +285,16 @@
         position: absolute;
         left: 0;
         top: 0;
-        height: 100%;
+        height: 40px;
         z-index: -1;
         background: $main-color;
         transition: width 0.35s ease-in-out, transform 0.35s ease-in-out;
+    }
+
+    .project__slider--active {
+        background: rgba(255,255,255,0.3);
+        cursor: grabbing;
+        transform: scale(1);
     }
 
     .projects-section__grid {
@@ -252,8 +313,41 @@
             display: flex;
             justify-content: flex-start;
             flex-wrap: wrap;
+            gap: 0;
             .projects-section__article {
                 margin-bottom: 2em;
+            }
+        }
+
+        @media (max-width: 767px) {
+            display: block !important;
+            padding: 25px 10px;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            white-space: nowrap;
+            user-select: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            transform: scale(0.98);
+            will-change: transform;
+            position: relative;
+            background: rgba(255,255,255,0.1);
+            font-size: 0;
+            perspective: 500px;
+            &.flexing {
+                .projects-section__article {
+                    flex: 0 0 100%;
+                    max-width: 100%;
+                }
+            }
+            .projects-section__article {
+                width: 100%;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                &:not(:first-child) {
+                    margin: 0 0 0 25px;
+                }
             }
         }
 

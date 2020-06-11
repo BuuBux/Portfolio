@@ -5,12 +5,12 @@
                 <div class="col-12 contact__header">
                     <section-header-component header="Porozmawiajmy..." />
                 </div>
-                <div class="col-6 contact__left">
+                <div class="col-12 col-lg-6 contact__left">
                     <form-component
                             contact-header="Poproś o kontakt"
                             class="stretch" />
                 </div>
-                <div class="col-5 contact__right">
+                <div class="col-5 d-none d-lg-flex align-items-center contact__right">
                     <g-image class="contact__image" src="../assets/mail_box.svg" />
                 </div>
             </div>
@@ -34,6 +34,7 @@
 
     .contact {
         padding: 150px 0 250px;
+        transition: padding 0.1s ease;
         background: rgb(255,255,255);
         background: linear-gradient(90deg,
                 rgba(255,255,255,1) 0%,
@@ -41,6 +42,9 @@
                 rgba(250,250,250,1) 25%,
                 rgba(250,250,250,1) 100%
         );
+        @media (max-width: 767px) {
+            padding: 75px 0 125px;
+        }
         .contact__left {
             display: flex;
             .stretch {

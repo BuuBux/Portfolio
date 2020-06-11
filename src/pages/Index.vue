@@ -15,8 +15,7 @@
               :external="false"
               href="#about" />
           </div>
-<!--          <g-image class="header__image" src="../assets/undraw_computer.svg" />-->
-          <header-image class="header__image" />
+          <header-image class="d-none d-md-block header__image" />
         </div>
         <div class="row header__links">
           <div class="col-6">
@@ -126,10 +125,16 @@ export default {
   .header__image {
     position: absolute;
     left: 50%;
-    max-width: 75vh;
+    max-width: 45vw;
   }
   .read-more__header {
     margin-top: 50px;
+    @media (max-width: 1199px) {
+      margin-top: 25px;
+    }
+    @media (max-width: 575px) {
+      margin: 25px auto 0 auto;
+    }
   }
   .header__stretch {
     display: flex;
@@ -138,12 +143,32 @@ export default {
     > .row {
       &:first-child {
         flex-grow: 1;
+        @media (min-height: 700px) {
+          justify-content: center;
+          margin: 150px 0 100px 0;
+          .header__image {
+            display: flex !important;
+            flex: 0 0 100%;
+            order: -1;
+            max-width: 80%;
+            position: static;
+          }
+        }
       }
       align-items: center;
     }
   }
   .header__title {
     font: 700 52px/1.5 'Poppins', sans-serif;
+    @media (max-width: 1599px) {
+      font: 700 38px/1.5 'Poppins', sans-serif;
+    }
+    @media (max-width: 1199px) {
+      font: 700 28px/1.5 'Poppins', sans-serif;
+    }
+    @media (max-width: 991px) {
+      font: 700 24px/1.5 'Poppins', sans-serif;
+    }
     .header__title--decorator {
       animation: 0.6s ease-in-out infinite alternate blinking;
     }
@@ -153,5 +178,8 @@ export default {
   }
   .header__links {
     margin-bottom: 50px;
+    @media (max-width: 767px) {
+      margin-bottom: 25px;
+    }
   }
 </style>

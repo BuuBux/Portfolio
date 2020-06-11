@@ -55,6 +55,22 @@
             background-size: cover;
             background-repeat: no-repeat;
             flex-grow: 1;
+            transition: min-height 0.2s ease-in-out;
+            @media (max-width: 1599px) {
+                min-height: 220px;
+            }
+            @media (max-width: 1199px) {
+                min-height: 180px;
+            }
+            @media (max-width: 991px) {
+                min-height: 140px;
+            }
+            @media (max-width: 767px) {
+                min-height: 320px;
+            }
+            @media (max-width: 575px) {
+                min-height: 50vw;
+            }
         }
         &:hover {
             .projects-section__details {
@@ -94,6 +110,7 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        text-align: center;
         background: rgba(37, 37, 37, 0.97);
         left: 0;
         top: 0;

@@ -36,6 +36,7 @@
     text-align: center;
     padding: 18px 0;
     box-shadow: 4px 4px 20px 0 rgba(0, 0, 0, 0.12);
+    background: #fff;
     text-decoration: none;
     font: 400 18px/1 'Poppins', sans-serif;
     color: $main-color;
@@ -56,7 +57,7 @@
             height: 100%;
             width: 0;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translate3D(-50%, 0, 0);
             border-top: 2px solid transparent;
             border-bottom: 2px solid transparent;
             transition: width 0.35s ease-in-out, border 0.35s ease-in-out;

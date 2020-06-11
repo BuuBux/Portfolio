@@ -32,11 +32,15 @@
     @import '../styles/variables';
     .footer{
         position: relative;
+        transition: padding 0.1s ease;
+        @media (max-width: 575px) {
+            padding: 150px 0 20px;
+        }
         &:before {
             content: '';
             width: 100%;
             display: block;
-            background: url(../assets/wave.svg) top left / contain no-repeat;
+            background: url(../assets/wave.svg) top left / 100% no-repeat;
             height: 184px;
             top: -1px;
             left: 0;
