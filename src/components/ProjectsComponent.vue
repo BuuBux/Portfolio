@@ -37,6 +37,7 @@
                     name="grid"
                     tag="div">
                     <projects-article-component
+                        :isFired="fired"
                         :selected="selected"
                         :key="project.id"
                         v-for="(project, index) in projects"
@@ -340,7 +341,7 @@
             will-change: transform;
             position: relative;
             background: rgba(255,255,255,0.1);
-            font-size: 0;
+            /*font-size: 0;*/
             perspective: 500px;
             &.flexing {
                 .projects-section__article {

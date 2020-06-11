@@ -18,7 +18,7 @@
 <style lang="scss">
   .header {
     min-height: 100vh;
-    background: url('../assets/background.png') top right / 100vh no-repeat;
+    background: url('../assets/background.svg') top right / 100vh no-repeat;
     display: flex;
       @media (max-width: 991px) {
          background-size: 80vw;

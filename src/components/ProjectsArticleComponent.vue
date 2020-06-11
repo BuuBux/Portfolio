@@ -2,18 +2,23 @@
     <article
         class="projects-section__article"
         :class="[`project__${index+1}`, { 'col-md-6 col-lg-4' : selected !== ''}]">
-        <div :style="`background-image: url(${project.projectImage.url})`"
+        <div ref="project" :data-src="`background-image: url(${project.projectImage.url})`"
              class="projects-section__background">
             <div class="projects-section__details">
                 <h4 class="project-name">
                     {{project.projectTitle}}<span class="project-name__decorator">_</span>
                 </h4>
                 <div class="projects-section__links">
-                    <a :href="project.projectUrl">
-                        <i class="fas fa-globe-americas"></i>
+                    <a rel="noreferrer noopener"
+                       :aria-label='`${project.projectTitle}-website`'
+                       :href="project.projectUrl">
+                            <i class="fas fa-globe-americas"></i>
                     </a>
-                    <a v-if="project.githubLinkToProject" :href="project.githubLinkToProject">
-                        <i class="fab fa-github-alt"></i>
+                    <a rel="noreferrer noopener"
+                       :aria-label='`${project.projectTitle}-github`'
+                       v-if="project.githubLinkToProject"
+                       :href="project.githubLinkToProject">
+                            <i class="fab fa-github-alt"></i>
                     </a>
                 </div>
             </div>
@@ -24,6 +29,10 @@
 <script>
     export default {
         props: {
+            isFired: {
+                type: Boolean,
+                required: true
+            },
             selected: {
                 type: String,
                 required: true
@@ -35,6 +44,12 @@
             index: {
                 type: Number,
                 required: true
+            }
+        },
+        watch: {
+            isFired: function(val) {
+                if (val)
+                    this.$refs.project.setAttribute('style', this.$refs.project.getAttribute('data-src'));
             }
         }
     }

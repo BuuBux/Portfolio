@@ -1,5 +1,5 @@
 <template>
-    <svg viewBox="0 0 1140 655" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <svg viewBox="0 0 1140 655" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/">
     <g id="computer">
         <g transform="matrix(1,0,0,1,-30.4146,-122.728)">
             <path d="M714.207,141.381L454.038,141.381L454.038,136.018L336.067,136.018L336.067,141.381L74.825,141.381C65.17,141.381 57.226,149.325 57.226,158.979L57.226,515.231C57.226,524.886 65.17,532.83 74.825,532.83L714.207,532.83C723.862,532.83 731.806,524.886 731.806,515.231L731.806,158.979C731.806,149.325 723.862,141.381 714.207,141.381Z" style="fill:rgb(63,61,86);fill-rule:nonzero;"/>
@@ -102,6 +102,7 @@
         mounted() {
             const tl = gsap.timeline();
             tl
+                .to('.header__image', { scale: 1, opacity: 1, duration: 0.2, ease: 'expo.in' })
                 .from('#computer', { scale: 0, transformOrigin: 'center', duration: 0.5, ease: 'expo.out' })
                 .from('.to-expand', { width: 0, duration: 0.5, ease: 'expo.out'})
                 .from('.after-expand', {scale: 0, transformOrigin: 'center', duration: 0.5, ease: 'expo.out' })
@@ -120,3 +121,14 @@
     }
 
 </script>
+
+<style lang="scss">
+    .header__image {
+        opacity: 0;
+        transform: scale(0);
+        fill-rule:evenodd;
+        clip-rule:evenodd;
+        stroke-linejoin:round;
+        stroke-miterlimit:2;
+    }
+</style>
