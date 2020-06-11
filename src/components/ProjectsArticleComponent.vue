@@ -85,8 +85,13 @@
         z-index: 1;
         color: #fff;
         text-transform: uppercase;
+        @media (max-width: 1199px) {
+            font: 700 38px/1 'Rajdhani', sans-serif;
+        }
+        @media (max-width: 991px) {
+            font: 700 28px/1 'Rajdhani', sans-serif;
+        }
         @media (max-width: 767px) {
-            font: 700 36px/1 'Rajdhani', sans-serif;
         }
         @media (max-width: 410px) {
             font: 700 24px/1 'Rajdhani', sans-serif;
@@ -99,7 +104,7 @@
 
     .projects-section__links {
         margin: 15px;
-        @media (max-width: 767px) {
+        @media (max-width: 991px) {
             margin: 5px 0 0 0;
         }
         a {
@@ -110,6 +115,13 @@
             color: #fff;
             &:not(:first-child) {
                 margin-left: 20px;
+            }
+            font-size: 36px;
+            @media (max-width: 1599px) {
+                font-size: 28px;
+            }
+            @media (max-width: 991px) {
+                font-size: 24px;
             }
             @media (max-width: 767px) {
                 font-size: 22px;
