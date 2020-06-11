@@ -85,6 +85,26 @@ export default {
       { charset: 'utf-8' },
       { name: 'description', content: 'Kamil Kras portfolio' }
     ]
+  },
+  methods: {
+    smoothScroll(target) {
+      const targetPosition = target.getBoundingClientRect().top;
+      window.scrollBy({ top: targetPosition, left: 0, behavior: 'smooth' });
+    }
+  },
+  mounted() {
+    const self = this;
+    document
+            .querySelectorAll('a')
+            .forEach((link) =>
+                    (link.getAttribute('href').split('')[0] === '#')
+                      ? link.addEventListener('click', (e) => {
+                          e.preventDefault();
+                          const target = document.querySelector(`${link.getAttribute('href')}`);
+                          self.smoothScroll(target);
+                        })
+                      : null
+    );
   }
 }
 </script>
@@ -143,7 +163,7 @@ export default {
     > .row {
       &:first-child {
         flex-grow: 1;
-        @media (min-height: 700px) {
+        @media (min-height: 700px) and (max-width: 767px) {
           justify-content: center;
           margin: 150px 0 100px 0;
           .header__image {
