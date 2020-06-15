@@ -29,10 +29,6 @@
 <script>
     export default {
         props: {
-            isFired: {
-                type: Boolean,
-                required: true
-            },
             selected: {
                 type: String,
                 required: true
@@ -46,11 +42,15 @@
                 required: true
             }
         },
-        watch: {
-            isFired: function(val) {
-                if (val)
-                    this.$refs.project.setAttribute('style', this.$refs.project.getAttribute('data-src'));
-            }
+        methods: {
+          setImage() {
+              // setTimeout(() => {
+                  this.$refs.project.setAttribute('style', this.$refs.project.getAttribute('data-src'));
+              // }, 1000)
+          }
+        },
+        mounted() {
+            this.setImage();
         }
     }
 </script>

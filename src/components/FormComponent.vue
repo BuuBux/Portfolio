@@ -78,7 +78,7 @@
                 });
                 if (!this.$v.$invalid) {
                     axios.post('', {})
-                        .then((response) => {
+                        .then(() => {
                             this.contactForm = this.flashContactForm();
                         })
                         .catch((error) => {
@@ -110,7 +110,7 @@
         box-shadow: 4px 4px 20px 0 rgba(1, 1, 1, 0.2);
         transition: padding 0.1s ease;
         @media (max-width: 575px) {
-            padding: 20px;
+            padding: 35px;
         }
     }
     .contact__button {

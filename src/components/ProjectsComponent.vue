@@ -29,17 +29,18 @@
                class="row">
                 <transition-group
                     mode="out-in"
-                    @enter="playAnimation"
+                    @before-enter="beforeEnter"
+                    @enter="enter"
                     @leave="leave"
+                    @after-leave="afterLeave"
                     :css="false"
                     class="projects-section__grid"
                     :class="{ 'flexing' : selected !== ''}"
                     name="grid"
                     tag="div">
                     <projects-article-component
-                        :isFired="fired"
                         :selected="selected"
-                        :key="project.id"
+                        :key="`${project.id}-${Math.floor((Math.random() * (100 - 1)) + 1)}`"
                         v-for="(project, index) in projects"
                         :project="project"
                         :index="index" />
@@ -69,7 +70,7 @@
 <script>
     import ProjectsArticleComponent from '../components/ProjectsArticleComponent';
     import SectionHeaderComponent from './SectionHeaderComponent';
-    import { debounce, uniqBy } from 'lodash';
+    import { debounce } from 'lodash';
     import gsap from 'gsap';
 
     export default {
@@ -79,9 +80,11 @@
         },
         data() {
             return {
+                height: 0,
                 selected: '',
                 projects: [],
                 fired: false,
+                show: false,
                 isDown: false,
                 startX: null,
                 scrollLeft: null,
@@ -106,33 +109,37 @@
             }
         },
         methods: {
-            leave(el, done) {
-                const delay = el.dataset.index * 150;
-                setTimeout(() => {
-                    gsap.to(el, {
-                        rotation: 0.01,
-                        x: -150,
-                        opacity: 0,
-                        scale: 0,
-                        position: 'absolute',
-                        duration: 0.5,
-                        onComplete: done
-                    })
-                }, delay);
+            beforeEnter(el) {
+                gsap.set(el, {
+                    scale: 0,
+                    opacity: 0,
+                    transformOrigin: 'center'
+                })
             },
-            playAnimation() {
-                gsap.to('.projects-section__article', {
-                    rotation: 0.01,
-                    duration: 0.75,
-                    opacity: 1,
+            enter(el, done) {
+                gsap.to(el, {
+                    duration: 0.3,
                     scale: 1,
-                    ease: 'expo.out',
-                    stagger: {
-                        each: 0.1,
-                        from: 'edges'
-                    },
-                });
-                this.fired = true;
+                    opacity: 1,
+                    ease: 'power3.in',
+                    onComplete: done
+                })
+            },
+            leave(el, done) {
+                gsap.to(el, {
+                    duration: 0.5,
+                    scale: 0,
+                    opacity: 0,
+                    ease: 'power3.out',
+                    position: 'absolute',
+                    onComplete: done
+                })
+            },
+            afterLeave(el) {
+                gsap.set(el, {
+                    scale: 0,
+                    opacity: 0
+                })
             },
             animateMenu() {
                 const parent = this.$refs.categoryList.getBoundingClientRect();
@@ -146,14 +153,15 @@
                 this.$refs.categoryDecorator.style.cssText = `transform: translate3D(${relativePosition.left}px, ${relativePosition.top}px, 0); width: ${width}px;`
             },
             switchActiveCategory(category) {
+              if (category === this.selected) return;
               this.selected = category;
               if (category !== '') {
                   this.projects = this.convertProject(this.$static.graphCMS.projects)
-                      .map((x) => x
-                          .filter((y) => category.toLowerCase() === y.projectType.toLowerCase()))
+                      .map((x) => x.filter((y) => category.toLowerCase() === y.projectType.toLowerCase()))
               } else {
                   this.projects = this.convertProject(this.$static.graphCMS.projects);
                 }
+              this.show = true;
             },
             convertProject(projects, distance = 12) {
                 const projectLength = (projects.length > distance)
@@ -172,7 +180,17 @@
                 const bottomOfImage = this.$refs.projects.getBoundingClientRect().top - document.documentElement.clientHeight / 2;
                 if (bottomOfImage <= 0) {
                     if (!this.fired) {
-                        this.playAnimation();
+                        this.fired = true;
+                        gsap.to('.projects-section__article', {
+                            scale: 1,
+                            opacity: 1,
+                            duration: 0.5,
+                            ease: 'power3.in',
+                            stagger: {
+                                each: 0.1,
+                                from: 'edges'
+                            }
+                        })
                     }
                 }
             },
@@ -228,7 +246,7 @@
                 this.animateMenu();
                 this.checkUserPosition();
                 this.checkIsMobile();
-            }, 1000)
+            }, 1000);
         }
     }
 </script>
@@ -293,6 +311,10 @@
         z-index: -1;
         background: $main-color;
         transition: width 0.35s ease-in-out, transform 0.35s ease-in-out;
+    }
+
+    .projects__slider {
+        position: relative;
     }
 
     .project__slider--active {
