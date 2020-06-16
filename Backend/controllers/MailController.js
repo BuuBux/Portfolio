@@ -15,17 +15,21 @@ async function mail({ name, email, topic, phone }) {
 
     // send mail with defined transport object
     let info = await transporter.sendMail({
-        from: '"Kamil Kras 👻" <contact@buubux.pl>', // sender address
+        from: `"Kamil Kras 👻" <${process.env.MY_MAIL}>`, // sender address
         to: `${email}`, // list of receivers
         subject: "Formularz kontaktowy ze strony internetowej ✔", // Subject line
         html: ` <h2> Dziękuje za kontakt, postaram się odpisać najszybciej jak to możliwe </h2> `
     });
 
     let info2 = await transporter.sendMail({
-        from: `${name} 🌹 <${mail}>`,
-        to: `kamilkras.kontakt@gmail.com`,
+        from: `${name} 🌹 <${process.env.MY_MAIL}>`,
+        to: `${process.env.MAIL_CARBON_COPY}, ${process.env.MY_MAIL}`,
         subject: `${name} kontaktuje się z Tobą ze strony www.buubux.pl`,
-        html: `<p>${topic} | ${(phone) ? phone : 'Telefon nie został poadny'}</p>`,
+        html: `
+            <h2> Mail kontaktowy - <a href="mailto:${email}"> ${email} </a> </h2> <br />
+            <h4> ${topic} </h4> <br />
+            <p> ${(phone) ? phone : 'Telefon nie został podany'} </p>   
+        `,
     })
 
     console.log("Message sent: %s", info.messageId);
@@ -44,4 +48,3 @@ exports.mailReceived = (req, res, next) => {
             next(err);
         })
 };
-

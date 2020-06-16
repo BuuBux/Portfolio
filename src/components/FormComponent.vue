@@ -59,7 +59,7 @@
             contactForm: {
               name: { required, minLength: minLength(3) },
               email: { required, email },
-              topic: { required, minLength: minLength(10) },
+              topic: { required, minLength: minLength(5) },
               phone: { },
           }
         },
