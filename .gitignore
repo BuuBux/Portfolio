@@ -7,3 +7,4 @@ dist
 .env
 .env.*
 .idea
+Backend/node_modules

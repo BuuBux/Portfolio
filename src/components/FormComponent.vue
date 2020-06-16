@@ -25,7 +25,8 @@
                 type="text" />
         <button class="read-more contact__button" type="submit">
             <span class="read-more__decorator read-more__sides" />
-                Wyślij zapytanie
+                <i v-if="clicked" class="fas fa-spinner fa-spin"></i>
+                <template v-else> Wyślij zapytanie </template>
             <span class="read-more__decorator read-more__vertices" />
         </button>
     </form>
@@ -44,7 +45,8 @@
                     email: '',
                     topic: '',
                     phone: '',
-                }
+                },
+                clicked: false,
             }
         },
         props: {
@@ -65,23 +67,49 @@
             InputComponent
         },
         methods: {
+            clearFocus() {
+                const fields = document.querySelectorAll('.field');
+                setTimeout(() => {
+                    fields.forEach((field) => {
+                        console.log(field);
+                        if (field.classList.contains('focused')) {
+                            field.classList.remove('focused');
+                        }
+                        if (field.classList.contains('field--invalid')) {
+                            field.classList.remove('field--invalid');
+                        }
+                    })
+                }, 150)
+
+            },
             flashContactForm() {
+                this.clearFocus()
+                this.clicked = false;
                 return { name: '', email: '', topic: '', phone: '' }
             },
             sendMail() {
                 this.$v.$touch();
-                this.$notify({
-                    group: 'info',
-                    type: 'error',
-                    title: 'Important message',
-                    text: 'Hello user! This is a notification!'
-                });
+                this.clicked = true;
+                const { name, email, topic, phone } = this.contactForm;
                 if (!this.$v.$invalid) {
-                    axios.post('', {})
+                    axios.post('api/mail', { name, email, topic, phone })
                         .then(() => {
+                            this.$notify({
+                                group: 'info',
+                                type: 'success',
+                                title: `Dziękuje za kontakt ${this.contactForm.name} ✔`,
+                                text: `Na twój adres mail powinno przyjść potwierdzenie`
+                            })
                             this.contactForm = this.flashContactForm();
                         })
                         .catch((error) => {
+                            this.$notify({
+                                group: 'info',
+                                type: 'error',
+                                title: 'Coś poszło nie tak 🤔',
+                                text: 'Napisz na mail contact@buubux.pl lub spróbuj ponownie'
+                            });
+                            this.contactForm = this.flashContactForm();
                             throw Error(error);
                         });
                 }

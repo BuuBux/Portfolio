@@ -2,15 +2,14 @@
     <div
         :class="{ 'focused' : isFocused }"
         class="field">
-        <label
-            class="field__label">
+        <label class="field__label">
             <span class="field__title"> {{ title }} </span>
             <input
-                    @focusin="isFocused = true"
-                    v-bind="$attrs"
-                    v-on="$listeners"
-                    class="field__input"
-                    v-model="inputValue" />
+                @focusin="isFocused = true"
+                v-bind="$attrs"
+                v-on="$listeners"
+                class="field__input"
+                v-model="inputValue"/>
         </label>
     </div>
 </template>
@@ -31,7 +30,11 @@
             }
         },
         watch: {
-            inputValue: function (updatedValue) {
+            $attrs({ value }) {
+              if (value === '')
+                  this.inputValue = '';
+            },
+            inputValue(updatedValue) {
                 this.$emit('input', updatedValue);
             }
         }

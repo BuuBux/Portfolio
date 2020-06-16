@@ -44,9 +44,7 @@
         },
         methods: {
           setImage() {
-              // setTimeout(() => {
-                  this.$refs.project.setAttribute('style', this.$refs.project.getAttribute('data-src'));
-              // }, 1000)
+              this.$refs.project.setAttribute('style', this.$refs.project.getAttribute('data-src'));
           }
         },
         mounted() {

@@ -7,11 +7,11 @@
                 </div>
                 <div class="col-12 col-lg-6 contact__left">
                     <form-component
-                            contact-header="Poproś o kontakt"
-                            class="stretch" />
+                        contact-header="Poproś o kontakt"
+                        class="stretch" />
                 </div>
                 <div class="col-5 d-none d-lg-flex align-items-center contact__right">
-                    <g-image class="contact__image" src="../assets/mail_box.svg" />
+                    <g-image alt="mail-box" class="contact__image" src="../assets/mail_box.svg" />
                 </div>
             </div>
         </div>
