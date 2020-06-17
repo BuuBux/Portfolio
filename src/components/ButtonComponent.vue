@@ -4,7 +4,7 @@
             {{ buttonText }}
         <span class="read-more__decorator read-more__vertices" />
     </a>
-    <g-link v-else class="read-more">
+    <g-link :to="to" v-else class="read-more">
         <span class="read-more__decorator read-more__sides" />
             {{ buttonText }}
         <span class="read-more__decorator read-more__vertices" />
@@ -13,7 +13,11 @@
 
 <script>
     export default {
+        inheritAttrs: false,
         props: {
+            to: {
+                required: false
+            },
             external: {
                 type: Boolean,
                 required: true

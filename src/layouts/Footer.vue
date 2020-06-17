@@ -54,11 +54,15 @@
             .social-links__item {
                 margin: 0 15px;
                 .social-links__link {
-                    .fab {
-                        color: #fff;
+                    svg {
                         &:hover {
-                            color: $secondary-color;
+                            path {
+                                fill: $secondary-color;
+                            }
                         }
+                    }
+                    path {
+                        fill: #fff;
                     }
                 }
             }

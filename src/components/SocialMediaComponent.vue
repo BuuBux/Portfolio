@@ -10,7 +10,7 @@
                     :href="social.socialUrl"
                     :title="social.name"
                     :alt="`Social media link - ${social.name}`">
-                    <i class="fab" :class="social.fontAwesomeClass"></i>
+                    <i :class="`icon-${(social.name).toLowerCase()}`" v-html="icons[(social.name).toLowerCase()]" />
                 </a>
             </li>
         </ul>
@@ -31,6 +31,18 @@
     }
 </static-query>
 
+<script>
+    import icons from '../services/icons';
+
+    export default {
+        data() {
+            return {
+                icons,
+            }
+        },
+    }
+</script>
+
 <style lang="scss">
     @import '../styles/variables';
     .social-links__list {
@@ -40,18 +52,22 @@
     .social-links__item {
         list-style: none;
         margin-right: 30px;
+        display: inline-block;
     }
     .social-links__link {
         text-decoration: none;
         &:hover {
-            .fab {
-                color: $secondary-color;
+            path {
+                fill: $secondary-color;
             }
         }
-        .fab {
-            transition: color 0.35s ease-in-out;
-            color: $main-color;
-            font-size: 30px;
+        svg {
+            max-width: 30px;
+            width: 100%;
+            path {
+                transition: fill 0.3s ease;
+                fill: $main-color;
+            }
         }
     }
 </style>

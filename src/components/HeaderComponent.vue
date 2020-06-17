@@ -1,34 +1,35 @@
 <template>
-    <div class="navigation__wrapper container fixed">
+    <div :class="{ 'navigation__wrapper--center' : !menu }" class="navigation__wrapper container fixed">
         <div class="row">
-                <div class="brand">
-                    <g-link to="/">
-                        <h1>
-                            <g-image
-                                class="brand__image"
-                                src="~/assets/logo.jpg"
-                                :alt="$static.metadata.siteName"
-                                tile="Kamil Kras - Jr. Frontend Developer" />
-                        </h1>
-                    </g-link>
-                </div>
+            <div class="brand">
+                <g-link to="/">
+                    <h1>
+                        <g-image
+                            class="brand__image"
+                            src="~/assets/logotest2.png"
+                            :alt="$static.metadata.siteName"
+                            tile="Kamil Kras - Jr. Frontend Developer" />
+                    </h1>
+                </g-link>
+            </div>
 
-                <div
-                    @click="isMenuOpen = !isMenuOpen"
-                    class="d-flex flex-column align-items-center justify-content-center d-md-none burger__wrapper">
-                    <span
-                        :key="elem"
-                        v-for="elem in menuClasses"
-                        class="burger__menu"
-                        :class="`menu__${elem}`" />
-                </div>
+            <div
+                v-if="menu"
+                @click="isMenuOpen = !isMenuOpen"
+                class="d-flex flex-column align-items-center justify-content-center d-md-none burger__wrapper">
+                <span
+                    :key="elem"
+                    v-for="elem in menuClasses"
+                    class="burger__menu"
+                    :class="`menu__${elem}`" />
+            </div>
 
-                <nav class="nav d-md-block">
-                    <g-link class="nav__link" to="/"> Strona główna </g-link>
-                    <a class="nav__link" href="#about"> O mnie </a>
-                    <a class="nav__link" href="#projects"> Projekty </a>
-                    <a class="nav__link" href="#contact"> Kontakt </a>
-                </nav>
+            <nav v-if="menu" class="nav d-md-block">
+                <g-link class="nav__link" to="/"> Strona główna </g-link>
+                <a class="nav__link" href="#about"> O mnie </a>
+                <a class="nav__link" href="#projects"> Projekty </a>
+                <a class="nav__link" href="#contact"> Kontakt </a>
+            </nav>
         </div>
     </div>
 </template>
@@ -48,6 +49,12 @@
     masterTl.reversed(true);
 
     export default {
+        props: {
+            menu: {
+                type: Boolean,
+                required: true,
+            }
+        },
         data() {
             return {
                 isMenuOpen: false,
@@ -135,6 +142,11 @@
     }
 
     .navigation__wrapper {
+        &.navigation__wrapper--center {
+            > .row {
+                justify-content: center;
+            }
+        }
         &.fixed {
             position: absolute;
             left: 0;
@@ -149,6 +161,9 @@
                 justify-content: space-around;
             }
         }
+    }
+    .brand--center {
+
     }
     .brand {
         line-height: 0;

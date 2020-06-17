@@ -11,14 +11,16 @@
                 <div class="projects-section__links">
                     <a rel="noreferrer noopener"
                        :aria-label='`${project.projectTitle}-website`'
+                       v-html="icons.internet"
+                       class="icon__anchors"
                        :href="project.projectUrl">
-                            <i class="fas fa-globe-americas"></i>
                     </a>
                     <a rel="noreferrer noopener"
                        :aria-label='`${project.projectTitle}-github`'
+                       class="icon__anchors"
                        v-if="project.githubLinkToProject"
+                       v-html="icons.github"
                        :href="project.githubLinkToProject">
-                            <i class="fab fa-github-alt"></i>
                     </a>
                 </div>
             </div>
@@ -27,7 +29,14 @@
 </template>
 
 <script>
+    import icons from '../services/icons';
+
     export default {
+        data() {
+            return {
+                icons,
+            }
+        },
         props: {
             selected: {
                 type: String,
@@ -116,31 +125,35 @@
     }
 
     .projects-section__links {
-        margin: 15px;
+        margin: 15px 0;
+        display: flex;
+        flex-wrap: wrap;
         @media (max-width: 991px) {
             margin: 5px 0 0 0;
         }
         a {
+            display: block;
+            svg {
+                display: inline-block;
+                max-width: 30px;
+                width: 100%;
+                @media (max-width: 575px) {
+                    max-height: 20px;
+                }
+                path {
+                    fill: #fff;
+                }
+            }
             transition: color 0.35s ease-in-out;
             &:hover {
-                color: $secondary-color;
+                svg {
+                    path {
+                        fill: $secondary-color;
+                    }
+                }
             }
-            color: #fff;
             &:not(:first-child) {
                 margin-left: 20px;
-            }
-            font-size: 36px;
-            @media (max-width: 1599px) {
-                font-size: 28px;
-            }
-            @media (max-width: 991px) {
-                font-size: 24px;
-            }
-            @media (max-width: 767px) {
-                font-size: 22px;
-            }
-            @media (max-width: 410px) {
-                font-size: 18px;
             }
         }
     }

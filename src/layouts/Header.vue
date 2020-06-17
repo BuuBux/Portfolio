@@ -1,6 +1,6 @@
 <template>
     <header class="header">
-      <header-component />
+      <header-component :menu="menu" />
       <slot/>
     </header>
 </template>
@@ -9,9 +9,15 @@
   import HeaderComponent from '../components/HeaderComponent';
 
   export default {
-    components: {
-      HeaderComponent
-    }
+      props: {
+          menu: {
+              type: Boolean,
+              required: true,
+          }
+      },
+      components: {
+        HeaderComponent
+      }
   }
 </script>
 

@@ -25,7 +25,7 @@
                 type="text" />
         <button class="read-more contact__button" type="submit">
             <span class="read-more__decorator read-more__sides" />
-                <i v-if="clicked" class="fas fa-spinner fa-spin"></i>
+                <i v-if="clicked" v-html="icons.spin" />
                 <template v-else> Wyślij zapytanie </template>
             <span class="read-more__decorator read-more__vertices" />
         </button>
@@ -36,10 +36,12 @@
     import InputComponent from './InputComponent';
     import axios from 'axios';
     import { required, minLength, email } from 'vuelidate/lib/validators';
+    import icons from '../services/icons';
 
     export default {
         data() {
             return {
+                icons,
                 contactForm: {
                     name: '',
                     email: '',
@@ -147,6 +149,10 @@
         margin: 55px auto 0;
         outline: none;
         transition: margin 0.1s ease;
+        svg {
+            max-width: 18px;
+            width: 100%;
+        }
         @media (max-width: 575px) {
             margin: 20px auto 0;
         }

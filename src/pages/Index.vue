@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <Header>
+    <Header :menu="true">
       <div class="container header__stretch">
         <div class="row">
           <div class="col-12">
@@ -18,16 +18,16 @@
           <header-image class="header__image" />
         </div>
         <div class="row header__links">
-          <div class="col-6">
+          <div class="col-12">
             <social-media />
           </div>
-          <div class="col-6">
-            <button-component
-              class="read-more__faq"
-              buttonText="FAQ"
-              :external="false"
-              href="#about" />
-          </div>
+<!--          <div class="col-6">-->
+<!--            <button-component-->
+<!--              class="read-more__faq"-->
+<!--              buttonText="FAQ"-->
+<!--              :external="false"-->
+<!--              href="#about" />-->
+<!--          </div>-->
         </div>
       </div>
     </Header>
