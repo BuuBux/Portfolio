@@ -8,3 +8,4 @@ dist
 .env.*
 .idea
 Backend/node_modules
+src/assets/kamilkras-cv.pdf

@@ -16,7 +16,8 @@
                         class="about__button"
                         button-text="Pobierz CV"
                         :external="true"
-                        href="./assets/cv.pdf" />
+                        href="/assets/kamilkras-cv.pdf"
+                        download />
                 </div>
                 <div class="order-0 order-lg-1 col-lg-5 col-xl-4 skills__wrapper">
                     <skills-image />

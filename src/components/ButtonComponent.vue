@@ -1,5 +1,5 @@
 <template>
-    <a v-if="external" class="read-more">
+    <a v-if="external" v-bind="$attrs" class="read-more" >
         <span class="read-more__decorator read-more__sides" />
             {{ buttonText }}
         <span class="read-more__decorator read-more__vertices" />
