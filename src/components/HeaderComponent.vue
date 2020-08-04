@@ -8,6 +8,7 @@
                             class="brand__image"
                             src="~/assets/logod3.svg"
                             :alt="$static.metadata.siteName"
+                            quality="80"
                             tile="Kamil Kras - Jr. Frontend Developer" />
                     </h1>
                 </g-link>
@@ -171,6 +172,10 @@
     .brand__image {
         max-width: 325px;
         width: 100%;
+        height: 60px;
+        @media (max-width: 475px) {
+          max-width: 225px;
+        }
     }
 
     .nav {

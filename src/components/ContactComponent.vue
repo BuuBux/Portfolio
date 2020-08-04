@@ -11,7 +11,7 @@
                         class="stretch" />
                 </div>
                 <div class="col-5 d-none d-lg-flex align-items-center contact__right">
-                    <g-image alt="mail-box" class="contact__image" src="../assets/mail_box.svg" />
+                    <g-image title="Kontakt mailowy" alt="Skontaktuj się ze mną" class="contact__image" src="../assets/mail_box.svg" quality="80" />
                 </div>
             </div>
         </div>

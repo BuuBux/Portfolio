@@ -5,30 +5,30 @@
                 <div class="col-12">
                     <div class="footer__contact">
                         <div class="footer__image">
-                            <g-image src="../assets/men-in-suit.svg" quality="80" />
+                            <g-image src="../assets/men-in-suit.svg" alt="Jak się ze mną skontaktować?" title="Kamil Kras - Dane kontaktowe" quality="80" />
                         </div>
                         <div class="footer__about">
                             <h2 class="footer__title"> Kontakt </h2>
                             <div class="contact__element">
-                                <a href="mailto:kamilkras.kontakt@gmail.com">
+                                <a href="mailto:kamilkras.kontakt@gmail.com" title="Adres mailowy">
                                     <p class="contact__name"> EMAIL </p>
                                     <p class="contact__value"> kamilkras.kontakt@gmail.com </p>
                                 </a>
                             </div>
                             <div class="contact__element">
-                                <a href="https://github.com/BuuBux">
+                                <a href="https://github.com/BuuBux" title="Github">
                                     <p class="contact__name"> GITHUB </p>
                                     <p class="contact__value"> BuuBux </p>
                                 </a>
                             </div>
                             <div class="contact__element">
-                                <a href="https://www.linkedin.com/in/kamil-kras-636baa128/">
+                                <a href="https://www.linkedin.com/in/kamil-kras-636baa128/" title="Linkedin">
                                     <p class="contact__name"> LINKEDIN </p>
                                     <p class="contact__value"> Kamil Kras </p>
                                 </a>
                             </div>
                             <div class="contact__element">
-                                <a href="tel:533289033">
+                                <a href="tel:533289033" title="Mój telefon">
                                     <p class="contact__name"> TELEFON </p>
                                     <p class="contact__value"> 533 - 289 - 033 </p>
                                 </a>
