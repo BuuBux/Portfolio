@@ -3,12 +3,38 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <g-image
-                            class="footer__Logo"
-                            src="../assets/logo-inverse.png"
-                            alt="Frontend Developer"
-                            title="Kamil Kras - Portfolio" />
-                    <social-media-component />
+                    <div class="footer__contact">
+                        <div class="footer__image">
+                            <g-image src="../assets/men-in-suit.svg" quality="80" />
+                        </div>
+                        <div class="footer__about">
+                            <h2 class="footer__title"> Kontakt </h2>
+                            <div class="contact__element">
+                                <a href="mailto:kamilkras.kontakt@gmail.com">
+                                    <p class="contact__name"> EMAIL </p>
+                                    <p class="contact__value"> kamilkras.kontakt@gmail.com </p>
+                                </a>
+                            </div>
+                            <div class="contact__element">
+                                <a href="https://github.com/BuuBux">
+                                    <p class="contact__name"> GITHUB </p>
+                                    <p class="contact__value"> BuuBux </p>
+                                </a>
+                            </div>
+                            <div class="contact__element">
+                                <a href="https://www.linkedin.com/in/kamil-kras-636baa128/">
+                                    <p class="contact__name"> LINKEDIN </p>
+                                    <p class="contact__value"> Kamil Kras </p>
+                                </a>
+                            </div>
+                            <div class="contact__element">
+                                <a href="tel:533289033">
+                                    <p class="contact__name"> TELEFON </p>
+                                    <p class="contact__value"> 533 - 289 - 033 </p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-12 footer__copyright">
                     <p> © {{new Date().getFullYear()}} Kamil Kras. All right reserved </p>
@@ -48,33 +74,51 @@
         }
         padding: 250px 0 20px;
         background-image: linear-gradient(to right, $main-color 0%, rgba($main-color, 0.6) 100%);
-        .social-links__list {
+        .footer__contact {
+            display: flex;
             justify-content: center;
-            margin: 35px 0;
-            .social-links__item {
-                margin: 0 15px;
-                .social-links__link {
-                    svg {
-                        &:hover {
-                            path {
-                                fill: $secondary-color;
-                            }
-                        }
-                    }
-                    path {
-                        fill: #fff;
-                    }
+            align-items: center;
+        }
+        .footer__about {
+            padding-left: 45px;
+        }
+        .footer__title {
+            font: 700 3em/1.5 'Poppins', sans-serif;
+            color: #fff;
+            margin: 0 0 25px 0;
+        }
+        .contact__element {
+            margin: 0 0 15px 0;
+            a {
+                display: inline-block;
+                width: 100%;
+                text-decoration: none;
+                &:hover {
+                    .contact__value { color: rgba(#fff, 1); }
+                }
+                .contact__name {
+                    font: 700 16px/1.25 'Poppins', sans-serif;
+                    color: #fff;
+                }
+                .contact__value {
+                    color: rgba(#fff, 0.7);
+                    transition: color 0.2s ease-in-out;
                 }
             }
-        }
-        .footer__Logo {
-            margin: 0 auto;
-            display: block;
         }
         .footer__copyright {
             text-align: center;
             color: #fff;
+            margin-top: 45px;
             font: 400 12px/1.5 'Poppins', sans-serif;
+        }
+        @media (max-width: 375px) {
+            .footer__image {
+                display: none;
+            }
+            .footer__about {
+                padding-left: 0;
+            }
         }
     }
 </style>

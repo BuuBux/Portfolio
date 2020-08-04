@@ -91,10 +91,10 @@
             },
             sendMail() {
                 this.$v.$touch();
-                this.clicked = true;
                 const { name, email, topic, phone } = this.contactForm;
                 if (!this.$v.$invalid) {
-                    axios.post('api/mail', { name, email, topic, phone })
+                  this.clicked = true;
+                  axios.post('api/mail', { name, email, topic, phone })
                         .then(() => {
                             this.$notify({
                                 group: 'info',
@@ -112,6 +112,7 @@
                                 text: 'Napisz na mail contact@buubux.pl lub spróbuj ponownie'
                             });
                             this.contactForm = this.flashContactForm();
+                            this.clicked = false;
                             throw Error(error);
                         });
                 }
