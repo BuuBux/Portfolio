@@ -12,7 +12,7 @@
             <button-component
               class="read-more__header"
               buttonText="Zobacz więcej"
-              :external="false"
+              :external="true"
               href="#about" />
           </div>
           <header-image class="header__image" />
