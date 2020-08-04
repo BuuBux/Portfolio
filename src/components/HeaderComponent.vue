@@ -6,7 +6,7 @@
                     <h1>
                         <g-image
                             class="brand__image"
-                            src="~/assets/logotest2.png"
+                            src="~/assets/logod3.svg"
                             :alt="$static.metadata.siteName"
                             tile="Kamil Kras - Jr. Frontend Developer" />
                     </h1>
@@ -151,7 +151,7 @@
             position: absolute;
             left: 0;
             right: 0;
-            top: 15px;
+            top: 45px;
             z-index: 3;
         }
         >.row {
@@ -169,9 +169,8 @@
         line-height: 0;
     }
     .brand__image {
-        max-height: 75px;
-        width: auto;
-        border-radius: 16px;
+        max-width: 325px;
+        width: 100%;
     }
 
     .nav {
