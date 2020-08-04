@@ -8,7 +8,7 @@
                     <button-component class="error__redirect" :external="false" button-text="Wróć" to="/" />
                 </div>
                 <div class="error__image col-12 col-lg-8">
-                    <g-image class="img" src="../assets/undraw_404.svg" quality="80" width="800"/>
+                    <g-image alt="Coś poszło nie tak" title="Próbujemy to naprawić" class="img" src="../assets/undraw_404.svg" quality="80" width="800"/>
                 </div>
             </div>
         </div>

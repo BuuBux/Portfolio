@@ -21,13 +21,6 @@
           <div class="col-12">
             <social-media />
           </div>
-<!--          <div class="col-6">-->
-<!--            <button-component-->
-<!--              class="read-more__faq"-->
-<!--              buttonText="FAQ"-->
-<!--              :external="false"-->
-<!--              href="#about" />-->
-<!--          </div>-->
         </div>
       </div>
     </Header>
