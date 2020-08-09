@@ -2,6 +2,7 @@
     <article
         class="projects-section__article"
         :class="[`project__${index+1}`, { 'col-md-6 col-lg-4' : selected !== ''}]">
+        <span v-if="project.wip" class="project--state"> WIP </span>
         <div ref="project" :data-src="`background-image: url(${project.projectImage.url})`"
              class="projects-section__background">
             <div class="projects-section__details">
@@ -65,7 +66,38 @@
 <style lang="scss">
     @import '../styles/variables';
 
+    .project--state {
+      position: absolute;
+      left: 15px;
+      bottom: 15px;
+      z-index: 10;
+      height: 60px;
+      width:  60px;
+      font: 700 20px/60px 'Rajdhani', sans-serif;
+      border-radius: 50%;
+      background: #0099FF;
+      color: #fff;
+      text-align: center;
+      @media (max-width: 767px) {
+        top: 15px;
+        bottom: auto;
+      }
+      &:hover {
+        &:after {
+          position: absolute;
+          right: -15px;
+          top: 50%;
+          transform: translate(100%,-50%);
+          content: 'Work in progress';
+          color: #fff;
+          display: inline-block;
+          width: 150px;
+        }
+      }
+    }
+
     .projects-section__article {
+        position: relative;
         display: flex;
         transform: scale(0);
         opacity: 0;

@@ -51,20 +51,21 @@
 </template>
 
 <static-query>
-    query {
-        graphCMS {
-            projects {
-                id
-                githubLinkToProject
-                projectTitle
-                projectType
-                projectUrl
-                projectImage {
-                    url
-                }
-            }
+  query {
+    graphCMS {
+      projects {
+        id
+        githubLinkToProject
+        projectTitle
+        projectType
+        projectUrl
+        projectImage {
+          url
         }
+        wip
+      }
     }
+  }
 </static-query>
 
 <script>
